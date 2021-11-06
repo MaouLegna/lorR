@@ -14,3 +14,8 @@ Suggests:
 Config/testthat/edition: 3
 URL: https://github.com/MaouLegna/lorR
 BugReports: https://github.com/MaouLegna/lorR/issues
+Imports: 
+    httr,
+    glue,
+    jsonlite,
+    purrr

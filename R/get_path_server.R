@@ -1,8 +1,8 @@
 #' Return the base path for one of Riot's shards
 #'
-#' @param server character - the value should be one among: americas,asia,europe,sea
+#' @param server a character, must be one of "americas", "asia", "europe", "sea"
 #'
-#' @return character string containing the url
+#' @return a character, string containing the url
 #' @export
 #'
 #' @examples
