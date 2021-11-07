@@ -58,5 +58,3 @@ Options beings considered:
 * Working with setting that assume a Developer Key
 
 * Working with multiple Developer Key
-
-
