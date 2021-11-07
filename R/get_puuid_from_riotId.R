@@ -17,11 +17,13 @@
 #' parsed - as a vector of only the puuid
 #' text   - as the original json from the API request
 #'
-#' @return depending on the format choosen return the information for the puuid. When encountering a status code different from 200 the output is NA
+#' @return depending on the format chosen return the information for the PUUID When encountering a status code different from 200 the output is NA
 #' @export
 #'
 #' @examples
-#' # get_puuid_from_riotId(gameName = "MaouLegna",tagLine = "STAT") # not run
+#' \dontrun{
+#' get_puuid_from_riotId(gameName = "MaouLegna",tagLine = "STAT")
+#' }
 get_puuid_from_riotId <- function(gameName,tagLine,format="parsed") {
 
 	path = glue::glue("/riot/account/v1/accounts/by-riot-id/{utils::URLencode(gameName, reserved = T)}/{utils::URLencode(tagLine, reserved = T)}")
@@ -30,7 +32,7 @@ get_puuid_from_riotId <- function(gameName,tagLine,format="parsed") {
 	status <- httr::status_code(APIcall)
 
 	if (status == 429) { message(glue::glue("Status {status} Wait for {APIcall$headers$`retry-after`}")) }
-	if (status %!in% c(200,429)) { warning(glue::glue("Warning - Status {status} with gameName: {gameName} and tagLine: {tagLine}")) }
+	if (status %!in% c(200,429)) { warning(glue::glue("Status {status} with gameName: {gameName} and tagLine: {tagLine}")) }
 	if (status == 200) {
 		switch(
 			format,

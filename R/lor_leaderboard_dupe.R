@@ -19,7 +19,9 @@
 #' @export
 #'
 #' @examples
-#' # lor_leaderboard_dupe("europe") # not run
+#' \dontrun{
+#' lor_leaderboard_dupe("europe")
+#' }
 lor_leaderboard_dupe <- function(server,api_key = Sys.getenv("LORAPI_KEY")) {
 
 	path <- "/lor/ranked/v1/leaderboards/"

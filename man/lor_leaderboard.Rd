@@ -32,5 +32,7 @@ Method RATE LIMITS
 \emph{X-Method-Rate-Limit": "500:10,30000:600 - Production Key}
 }
 \examples{
-# lor_leaderboard("europe") # not run
+\dontrun{
+# lor_leaderboard("europe")
+}
 }

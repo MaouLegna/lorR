@@ -27,6 +27,8 @@ This function helps you handling the REST API for the LoR API methods
 \emph{500 requests every 10 seconds  / 30,000 requests every 10 minutes - Production Key}
 }
 \examples{
+\dontrun{
 api_call("europe","/lor/ranked/v1/leaderboards/") # not run
-api_call("europe","/lor/ranked/v1/leaderboards/",timeout(3),times=3,quiet=FALSE) # not run
+api_call("europe","/lor/ranked/v1/leaderboards/",timeout(3),times=3,quiet=FALSE)
+}
 }

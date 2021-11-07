@@ -22,7 +22,9 @@
 #' @export
 #'
 #' @examples
-#' # lor_leaderboard("europe") # not run
+#' \dontrun{
+#' # lor_leaderboard("europe")
+#' }
 lor_leaderboard <- function(server,names=FALSE) {
 
 	path <- "/lor/ranked/v1/leaderboards/"

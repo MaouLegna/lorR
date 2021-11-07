@@ -15,8 +15,10 @@
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' api_call("europe","/lor/ranked/v1/leaderboards/") # not run
-#' api_call("europe","/lor/ranked/v1/leaderboards/",timeout(3),times=3,quiet=FALSE) # not run
+#' api_call("europe","/lor/ranked/v1/leaderboards/",timeout(3),times=3,quiet=FALSE)
+#' }
 api_call <- function(server, path, ..., api_key = Sys.getenv("LORAPI_KEY") ) {
 
 	if (api_key=="") stop("Set the LORAPI_key")
@@ -27,7 +29,8 @@ api_call <- function(server, path, ..., api_key = Sys.getenv("LORAPI_KEY") ) {
 	safeRETRY <- purrr::safely(function(url,...) httr::RETRY(verb = "GET",
 																													 url = url,
 																													 httr::add_headers("X-Riot-Token" = Sys.getenv("LORAPI_KEY")),
-																													 terminate_on=c(200,400,404,500,429))
+																													 terminate_on=c(200,400,404,500,429)),
+														 otherwise = NULL
 	)
 	safeRETRY(url=paste0(base.url,path))$result
 }

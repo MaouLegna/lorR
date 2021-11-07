@@ -16,7 +16,7 @@ parsed - as a vector of only the puuid
 text   - as the original json from the API request}
 }
 \value{
-depending on the format choosen return the information for the puuid. When encountering a status code different from 200 the output is NA
+depending on the format chosen return the information for the PUUID When encountering a status code different from 200 the output is NA
 }
 \description{
 Given the secondary key, a RiotID, return the PUUID of a player.
@@ -32,5 +32,7 @@ Method RATE LIMITS
 \emph{1000 requests every 1 minutes - Production Key}
 }
 \examples{
-# get_puuid_from_riotId(gameName = "MaouLegna",tagLine = "STAT") # not run
+\dontrun{
+get_puuid_from_riotId(gameName = "MaouLegna",tagLine = "STAT")
+}
 }

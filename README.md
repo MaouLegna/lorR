@@ -1,12 +1,17 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
+**NOTE: This is an incomplete package, more functions are to come.**
+
 # lorR
 
 <!-- badges: start -->
 <!-- badges: end -->
 
-The goal of lorR is to …
+The package can be used as handler for Legends of Runeterra API methods.
+
+A series of utility functions to transform the outputs from the API are
+also included.
 
 ## Installation
 
@@ -16,40 +21,54 @@ You can install the development version of lorR from
 ``` r
 # install.packages("devtools")
 devtools::install_github("MaouLegna/lorR")
+#> Downloading GitHub repo MaouLegna/lorR@HEAD
+#> glue (1.4.2 -> 1.5.0) [CRAN]
+#> Installing 1 packages: glue
+#> Installazione pacchetto in 'C:/Users/Valentino Vazzoler/AppData/Local/Temp/RtmpcP2FfD/temp_libpath474053f1117'
+#> (perché 'lib' non è specificato)
+#> 
+#>   C'è una versione binaria disponibile, ma la versione con le sorgenti
+#>   è successiva:
+#>      binary source needs_compilation
+#> glue  1.4.2  1.5.0              TRUE
+#> installazione pacchetto sorgenti 'glue'
+#>          checking for file 'C:\Users\Valentino Vazzoler\AppData\Local\Temp\Rtmp8SjC7b\remotes4785bd42fd0\MaouLegna-lorR-79bdd21/DESCRIPTION' ...  v  checking for file 'C:\Users\Valentino Vazzoler\AppData\Local\Temp\Rtmp8SjC7b\remotes4785bd42fd0\MaouLegna-lorR-79bdd21/DESCRIPTION' (623ms)
+#>       -  preparing 'lorR':
+#>    checking DESCRIPTION meta-information ...     checking DESCRIPTION meta-information ...   v  checking DESCRIPTION meta-information
+#>       -  checking for LF line-endings in source and make files and shell scripts
+#>       -  checking for empty or unneeded directories
+#>       -  building 'lorR_0.0.0.9000.tar.gz'
+#>      
+#> 
+#> Installazione pacchetto in 'C:/Users/Valentino Vazzoler/AppData/Local/Temp/RtmpcP2FfD/temp_libpath474053f1117'
+#> (perché 'lib' non è specificato)
 ```
 
-## Example
+## Setup
 
-This is a basic example which shows you how to solve a common problem:
+As an API key is necessary to work with the API methods, use the
+following to set up a Sys.setenv variable containing the key.
 
 ``` r
-library(lorR)
-## basic example code
+lorR::setAPIkey("RGAPI-01234567-abcd-8ef9-abcd-0123456789AB")
 ```
 
-What is special about using `README.Rmd` instead of just `README.md`?
-You can include R chunks like so:
+You can also put this in your .Rprofile for your project so you don’t
+have to type it every time.
 
-``` r
-summary(cars)
-#>      speed           dist       
-#>  Min.   : 4.0   Min.   :  2.00  
-#>  1st Qu.:12.0   1st Qu.: 26.00  
-#>  Median :15.0   Median : 36.00  
-#>  Mean   :15.4   Mean   : 42.98  
-#>  3rd Qu.:19.0   3rd Qu.: 56.00  
-#>  Max.   :25.0   Max.   :120.00
-```
+## Usage
 
-You’ll still need to render `README.Rmd` regularly, to keep `README.md`
-up-to-date. `devtools::build_readme()` is handy for this. You could also
-use GitHub Actions to re-render `README.Rmd` every time you push. An
-example workflow can be found here:
-<https://github.com/r-lib/actions/tree/v1/examples>.
+The library provides a series of functions wraps the methods of the LoR
+API.
 
-You can also embed plots, for example:
+The outputs are returned either clean or json text format.
 
-<img src="man/figures/README-pressure-1.png" width="100%" />
+## Note
 
-In that case, don’t forget to commit and push the resulting figure
-files, so they display on GitHub and CRAN.
+The package is still incomplete missing several fundamental functions.
+
+Options beings considered:
+
+-   Working with setting that assume a Developer Key
+
+-   Working with multiple Developer Key
