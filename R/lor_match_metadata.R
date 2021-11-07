@@ -59,7 +59,7 @@ lor_match_metadata <- function(server,match_id,maxPause=10,wait=T,quiet=F,format
 
 	if ( status != 200 ){
 		message(glue::glue("lor_match_metadata: Status: {status} - Server: {server}
-											 match_id: {puuid}"))
+											 match_id: {match_id}"))
 	}
 
 	switch(
