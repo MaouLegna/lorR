@@ -148,6 +148,3 @@ lor_match_metadata <- function(server,match_id,maxPause=10,wait=T,quiet=F,format
 		"text"   = APIcall |> httr::content(as= "text")
 	)
 }
-
-
-LoR.Metadata
