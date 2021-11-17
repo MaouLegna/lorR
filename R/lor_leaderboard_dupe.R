@@ -26,6 +26,10 @@ lor_leaderboard_dupe <- function(server,api_key = Sys.getenv("LORAPI_KEY")) {
 
 	path <- "/lor/ranked/v1/leaderboards/"
 	APIcall <- api_call(server = "europe",path = path,httr::timeout(3),times=3,quiet=FALSE)
+
+	# check if the APIcall wasn't "safely" done
+	if (is.null(APIcall)) return(NULL)
+
 	status <- httr::status_code(APIcall)
 
 	if (status == 429) { message(glue::glue("Status {status} Wait for {APIcall$headers$`retry-after`}")) }

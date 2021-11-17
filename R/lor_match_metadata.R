@@ -31,8 +31,60 @@
 #  match_id_404 <- "5c52dab6-4a50-491e-afdd-fcf32cadba0c"
 #' lor_match_metadata(server=server,match_id=match_id)
 #' lor_match_metadata(server=server,match_id=match_id,format="text")
+#' lor_match_metadata(server=server,match_id=match_id,format="long")
 #' }
 lor_match_metadata <- function(server,match_id,maxPause=10,wait=T,quiet=F,format="parsed") {
+
+	# Create the wide tidy table
+	LoR.Metadata <- tibble::tibble(match_key = character(),
+																 server = character(),
+																 data_version = character(),
+																 match_id = character(),
+
+																 participants_1 = character(),
+																 participants_2 = character(),
+																 participants_3 = character(),
+																 participants_4 = character(),
+
+																 game_mode = character(),
+																 game_type = character(),
+
+																 game_start_time_utc = character(),
+																 # game_start_time_utc = as.POSIXct(character(), format = "%Y-%m-%dT%H:%M:%OS" , tz = "UTC"),
+
+																 game_version = character(),
+
+																 puuid_1     = character(),
+																 deck_id_1   = character(),
+																 deck_code_1 = character(),
+																 factions_1  = character(),
+																 game_outcome_1  = character(),
+																 order_of_play_1 = numeric(),
+
+																 puuid_2     = character(),
+																 deck_id_2   = character(),
+																 deck_code_2 = character(),
+																 factions_2 = character(),
+																 game_outcome_2  = character(),
+																 order_of_play_2 = numeric(),
+
+																 puuid_3     = character(),
+																 deck_id_3   = character(),
+																 deck_code_3 = character(),
+																 factions_3 = character(),
+																 game_outcome_3  = character(),
+																 order_of_play_3 = numeric(),
+
+																 puuid_4     = character(),
+																 deck_id_4   = character(),
+																 deck_code_4 = character(),
+																 factions_4 = character(),
+																 game_outcome_4  = character(),
+																 order_of_play_4 = numeric(),
+
+																 total_turn_count = numeric(),
+																 status = numeric()
+	);
 
 	shards <- c("americas","asia","europe")
 	if ( server %!in% shards ) { stop(glue::glue("Provide a server value among one of these: {glue::glue_collapse(shards,sep = ',')}"),call. = F) }
@@ -51,6 +103,10 @@ lor_match_metadata <- function(server,match_id,maxPause=10,wait=T,quiet=F,format
 			base::system(glue::glue("Sleep {pause}"))
 
 			APIcall <- lorR::api_call(server = server,path = path,httr::timeout(3),times=3,quiet=FALSE)
+
+			# check if the APIcall wasn't "safely" done
+			if (is.null(APIcall)) return(NULL)
+
 			status <- httr::status_code(APIcall)
 		} else {
 			stop(glue::glue("A long pause has appeared: {pause} / something is wrong if you are using a poverful production key!"))
@@ -65,56 +121,6 @@ lor_match_metadata <- function(server,match_id,maxPause=10,wait=T,quiet=F,format
 	switch(
 		format,
 		"parsed" = {
-			# Create the wide tidy table
-			LoR.Metadata <- tibble::tibble(match_key = character(),
-																		 server = character(),
-																		 data_version = character(),
-																		 match_id = character(),
-
-																		 participants_1 = character(),
-																		 participants_2 = character(),
-																		 participants_3 = character(),
-																		 participants_4 = character(),
-
-																		 game_mode = character(),
-																		 game_type = character(),
-
-																		 game_start_time_utc = character(),
-																		 # game_start_time_utc = as.POSIXct(character(), format = "%Y-%m-%dT%H:%M:%OS" , tz = "UTC"),
-
-																		 game_version = character(),
-
-																		 puuid_1     = character(),
-																		 deck_id_1   = character(),
-																		 deck_code_1 = character(),
-																		 factions_1  = character(),
-																		 game_outcome_1  = character(),
-																		 order_of_play_1 = numeric(),
-
-																		 puuid_2     = character(),
-																		 deck_id_2   = character(),
-																		 deck_code_2 = character(),
-																		 factions_2 = character(),
-																		 game_outcome_2  = character(),
-																		 order_of_play_2 = numeric(),
-
-																		 puuid_3     = character(),
-																		 deck_id_3   = character(),
-																		 deck_code_3 = character(),
-																		 factions_3 = character(),
-																		 game_outcome_3  = character(),
-																		 order_of_play_3 = numeric(),
-
-																		 puuid_4     = character(),
-																		 deck_id_4   = character(),
-																		 deck_code_4 = character(),
-																		 factions_4 = character(),
-																		 game_outcome_4  = character(),
-																		 order_of_play_4 = numeric(),
-
-																		 total_turn_count = numeric(),
-																		 status = numeric()
-			);
 			LoR.Metadata |>
 				tibble::add_row(
 					#
@@ -124,6 +130,24 @@ lor_match_metadata <- function(server,match_id,maxPause=10,wait=T,quiet=F,format
 					APIcall |> assignMatch()
 				)
 		},
+		"long" = {
+			LoR.Metadata |>
+				tibble::add_row(
+					#
+					match_key = match_id,
+					server = server,
+					# content from the API GET()
+					APIcall |> assignMatch()
+				) |>
+				tidyr::pivot_longer(cols = c(ends_with("_1"),ends_with("_2"),ends_with("_3"),ends_with("_4") ),
+										 names_to = c(".value"),
+										 names_pattern = "(.*)_[0-9]"
+				) |>
+				dplyr::filter( !is.na(participants) )
+		},
 		"text"   = APIcall |> httr::content(as= "text")
 	)
 }
+
+
+LoR.Metadata

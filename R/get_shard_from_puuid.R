@@ -38,6 +38,10 @@ get_shard_from_puuid <- function(puuid,format="parsed") {
 
 	# the value of the server is not important when using ACCOUNT methods
 	APIcall <- lorR::api_call(server = "europe",path = path,httr::timeout(3),times=3,quiet=FALSE)
+
+	# check if the APIcall wasn't "safely" done
+	if (is.null(APIcall)) return(NULL)
+
 	status <- httr::status_code(APIcall)
 
 	if (status == 429) { message(glue::glue("Status {status} Wait for {APIcall$headers$`retry-after`}")) }

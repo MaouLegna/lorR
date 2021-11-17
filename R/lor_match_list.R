@@ -47,6 +47,10 @@ lor_match_list <- function(server,puuid,maxPause=10,wait=T,quiet=F,format="parse
 
 	path = glue::glue("/lor/match/v1/matches/by-puuid/{puuid}/ids/")
 	APIcall <- lorR::api_call(server = server,path = path,httr::timeout(3),times=3,quiet=FALSE)
+
+	# check if the APIcall wasn't "safely" done
+	if (is.null(APIcall)) return(NULL)
+
 	status <- httr::status_code(APIcall)
 
 	# If 429 try again, once after the pause

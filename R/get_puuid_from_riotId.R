@@ -22,13 +22,17 @@
 #'
 #' @examples
 #' \dontrun{
-#' get_puuid_from_riotId(gameName = "MaouLegna",tagLine = "STAT")
+#' lorR::get_puuid_from_riotId(gameName = "MaouLegna",tagLine = "STAT")
 #' }
 get_puuid_from_riotId <- function(gameName,tagLine,format="parsed") {
 
 	path = glue::glue("/riot/account/v1/accounts/by-riot-id/{utils::URLencode(gameName, reserved = T)}/{utils::URLencode(tagLine, reserved = T)}")
 	# the value of the server is not important when using ACCOUNT methods
 	APIcall <- api_call(server = "europe",path = path,httr::timeout(3),times=3,quiet=FALSE)
+
+	# check if the APIcall wasn't "safely" done
+	if (is.null(APIcall)) return(NULL)
+
 	status <- httr::status_code(APIcall)
 
 	if (status == 429) { message(glue::glue("Status {status} Wait for {APIcall$headers$`retry-after`}")) }
