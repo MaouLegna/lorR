@@ -23,12 +23,13 @@
 #'
 #' @examples
 #' \dontrun{
-#' # lor_leaderboard("europe")
+#' # lor_leaderboard("europe",names = TRUE)
+#' # lor_leaderboard("americas")
 #' }
 lor_leaderboard <- function(server,names=FALSE) {
 
 	path <- "/lor/ranked/v1/leaderboards/"
-	APIcall <- api_call(server = "europe",path = path,httr::timeout(3),times=3,quiet=FALSE)
+	APIcall <- api_call(server = server,path = path,httr::timeout(3),times=3,quiet=FALSE)
 
 	# check if the APIcall wasn't "safely" done
 	if (is.null(APIcall)) return(NULL)
@@ -37,10 +38,14 @@ lor_leaderboard <- function(server,names=FALSE) {
 
 	if (status == 429) { message(glue::glue("Status {status} Wait for {APIcall$headers$`retry-after`}")) }
 	if (status %!in% c(200,429)) { warning(glue::glue("Warning - Status {status}")) }
-	if (status == 200)
-		ifelse(
-			names == FALSE,
-			jsonlite::fromJSON( httr::content(APIcall, as="text"))$players,
-			jsonlite::fromJSON( httr::content(APIcall, as="text"))$players$name
-		)
+	if (status == 200) {
+
+		res <- jsonlite::fromJSON( httr::content(APIcall, as="text"))
+
+		if ( names == F ) {
+			res$players
+		} else {
+			res$players$name
+		}
+	}
 }

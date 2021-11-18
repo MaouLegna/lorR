@@ -18,7 +18,8 @@
 #' @param wait a logical, if TRUE (the default), if the pause is of less or equal to 10s it waits and repeat the call once
 #' @param quiet a logical, Hide errors (FALSE, the default), or display them as they occur?
 #' @param format a character, format of the output, must be:
-#' parsed - tibble of n games rows
+#' parsed - tibble of n row for n match
+#' long   - tibble of p row for each participant in a match
 #' text   - as the original json from the API request
 #'
 #' @return a tibble
@@ -28,7 +29,7 @@
 #' \dontrun{
 #' server <-  "europe"
 #' match_id <- "44a130ae-12f4-45f8-8a24-0b319265d616"
-#  match_id_404 <- "5c52dab6-4a50-491e-afdd-fcf32cadba0c"
+#  match_id <- "5c52dab6-4a50-491e-afdd-fcf32cadba0c"
 #' lor_match_metadata(server=server,match_id=match_id)
 #' lor_match_metadata(server=server,match_id=match_id,format="text")
 #' lor_match_metadata(server=server,match_id=match_id,format="long")
@@ -131,7 +132,7 @@ lor_match_metadata <- function(server,match_id,maxPause=10,wait=T,quiet=F,format
 				)
 		},
 		"long" = {
-			LoR.Metadata |>
+			res <- LoR.Metadata |>
 				tibble::add_row(
 					#
 					match_key = match_id,
@@ -142,8 +143,14 @@ lor_match_metadata <- function(server,match_id,maxPause=10,wait=T,quiet=F,format
 				tidyr::pivot_longer(cols = c(ends_with("_1"),ends_with("_2"),ends_with("_3"),ends_with("_4") ),
 										 names_to = c(".value"),
 										 names_pattern = "(.*)_[0-9]"
-				) |>
-				dplyr::filter( !is.na(participants) )
+				)
+			if ( status != 200 ) {
+				res |>
+					distinct()
+			} else {
+				res |>
+					dplyr::filter( !is.na(game_outcome) )
+			}
 		},
 		"text"   = APIcall |> httr::content(as= "text")
 	)
