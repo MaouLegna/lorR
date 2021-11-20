@@ -92,6 +92,10 @@ lor_match_metadata <- function(server,match_id,maxPause=10,wait=T,quiet=F,format
 
 	path = glue::glue("/lor/match/v1/matches/{match_id}")
 	APIcall <- lorR::api_call(server = server,path = path,httr::timeout(3),times=3,quiet=FALSE)
+
+	# check if the APIcall wasn't "safely" done
+	if (is.null(APIcall)) return(NULL)
+
 	status <- httr::status_code(APIcall)
 
 	# If 429 try again, once after the pause
