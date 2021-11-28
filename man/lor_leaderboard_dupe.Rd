@@ -31,5 +31,7 @@ Method RATE LIMITS
 \examples{
 \dontrun{
 lor_leaderboard_dupe("europe")
+lor_leaderboard_dupe("americas")
+lor_leaderboard_dupe("asia")
 }
 }

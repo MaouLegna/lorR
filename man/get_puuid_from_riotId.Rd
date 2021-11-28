@@ -33,6 +33,6 @@ Method RATE LIMITS
 }
 \examples{
 \dontrun{
-get_puuid_from_riotId(gameName = "MaouLegna",tagLine = "STAT")
+lorR::get_puuid_from_riotId(gameName = "MaouLegna",tagLine = "STAT")
 }
 }

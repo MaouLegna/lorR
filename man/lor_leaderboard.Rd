@@ -33,6 +33,7 @@ Method RATE LIMITS
 }
 \examples{
 \dontrun{
-# lor_leaderboard("europe")
+# lor_leaderboard("europe",names = TRUE)
+# lor_leaderboard("americas")
 }
 }

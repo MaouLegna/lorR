@@ -26,10 +26,9 @@
 #' newPuuids(LoR.Account.df = Example.Account.df, LoR.Match.df = Example.Match.df)
 newPuuids <- function(LoR.Account.df, LoR.Match.df) {
 	LoR.Match.df |>
-		dplyr::filter( game_mode %in% c("Constructed","SeasonalTournamentLobby","Bo3ChallengeLobby","StandardGauntletLobby","LastCallQualifierGauntletLobby") ) |>
-		tidyr::pivot_longer(cols = contains("puuid"),
-												values_to = "puuid"
-		) |>
+		dplyr::filter(game_mode %in% c("Constructed", "SeasonalTournamentLobby","Bo3ChallengeLobby", "StandardGauntletLobby","LastCallQualifierGauntletLobby") ) |>
+		dplyr::select(contains("puuid")) |>
+		tidyr::pivot_longer(cols = contains("puuid"),values_to = "puuid") |>
 		tidyr::drop_na() |>
 		dplyr::filter( !(puuid %in% LoR.Account.df$puuid) ) |>
 		dplyr::pull( puuid )

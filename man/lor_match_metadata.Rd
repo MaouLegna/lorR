@@ -26,7 +26,8 @@ With a developer key 120 is the suggested.}
 \item{quiet}{a logical, Hide errors (FALSE, the default), or display them as they occur?}
 
 \item{format}{a character, format of the output, must be:
-parsed - tibble of n games rows
+parsed - tibble of n row for n match
+long   - tibble of p row for each participant in a match
 text   - as the original json from the API request}
 }
 \value{
@@ -51,5 +52,6 @@ server <-  "europe"
 match_id <- "44a130ae-12f4-45f8-8a24-0b319265d616"
 lor_match_metadata(server=server,match_id=match_id)
 lor_match_metadata(server=server,match_id=match_id,format="text")
+lor_match_metadata(server=server,match_id=match_id,format="long")
 }
 }
