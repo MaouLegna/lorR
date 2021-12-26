@@ -144,16 +144,16 @@ lor_match_metadata <- function(server,match_id,maxPause=10,wait=T,quiet=F,format
 					# content from the API GET()
 					APIcall |> assignMatch()
 				) |>
-				tidyr::pivot_longer(cols = c(ends_with("_1"),ends_with("_2"),ends_with("_3"),ends_with("_4") ),
+				tidyr::pivot_longer(cols = c(dplyr::ends_with("_1"),dplyr::ends_with("_2"),dplyr::ends_with("_3"),dplyr::ends_with("_4") ),
 										 names_to = c(".value"),
 										 names_pattern = "(.*)_[0-9]"
 				)
 			if ( status != 200 ) {
 				res |>
-					distinct()
+					dplyr::distinct()
 			} else {
 				res |>
-					dplyr::filter( !is.na(game_outcome) )
+					dplyr::filter( !is.na(participants) )
 			}
 		},
 		"text"   = APIcall |> httr::content(as= "text")
