@@ -29,6 +29,8 @@ api_call <- function(server, path, ..., api_key = Sys.getenv("LORAPI_KEY") ) {
 	safeRETRY <- purrr::safely(function(url,...) httr::RETRY(verb = "GET",
 																													 url = url,
 																													 httr::add_headers("X-Riot-Token" = Sys.getenv("LORAPI_KEY")),
+																													 httr::timeout(3),
+																													 times=3,
 																													 terminate_on=c(200,400,404,500,429)),
 														 otherwise = NULL
 	)
