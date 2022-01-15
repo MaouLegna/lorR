@@ -28,7 +28,7 @@ get_puuid_from_riotId <- function(gameName,tagLine,format="parsed") {
 
 	path = glue::glue("/riot/account/v1/accounts/by-riot-id/{utils::URLencode(gameName, reserved = T)}/{utils::URLencode(tagLine, reserved = T)}")
 	# the value of the server is not important when using ACCOUNT methods
-	APIcall <- api_call(server = "europe",quiet=FALSE)
+	APIcall <- api_call(server = "europe",path = path,quiet=FALSE)
 
 	# check if the APIcall wasn't "safely" done
 	if (is.null(APIcall)) return(NULL)
