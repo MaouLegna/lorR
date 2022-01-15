@@ -7,7 +7,8 @@
 get_path_server(server)
 }
 \arguments{
-\item{server}{a character, must be one of "americas", "asia", "europe", "sea"}
+\item{server}{a character, must be one of "americas","apac","europe","asia","sea"
+Note; asia and sea are going to be removed after the 20th of January 2022}
 }
 \value{
 a character, string containing the url
@@ -17,5 +18,5 @@ Return the base path for one of Riot's shards
 }
 \examples{
 get_path_server("europe")
-get_path_server("americas")
+get_path_server("apac")
 }

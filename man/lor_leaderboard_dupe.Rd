@@ -7,7 +7,8 @@
 lor_leaderboard_dupe(server, api_key = Sys.getenv("LORAPI_KEY"))
 }
 \arguments{
-\item{server}{a character, must be one of "americas", "asia", "europe", "sea"}
+\item{server}{a character, must be one of "americas","apac","europe","asia","sea"
+Note; asia and sea are going to be removed after the 20th of January 2022}
 
 \item{api_key}{a character, default is an environment variables called LORAPI which must be set-up.}
 }

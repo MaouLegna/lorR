@@ -14,7 +14,8 @@ lor_match_list(
 )
 }
 \arguments{
-\item{server}{a character, must be one of "americas", "asia", "europe". "sea" is not yet supported}
+\item{server}{a character, must be one of "americas","apac","europe","asia","sea"
+Note; asia and sea are going to be removed after the 20th of January 2022}
 
 \item{puuid}{a character, string for PUUID, a string of 42char like RGAPI-XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX}
 
@@ -52,7 +53,7 @@ Method RATE LIMITS
 }
 \examples{
 \dontrun{
-server <- "asia"
+server <- "apac"
 puuid <- "WE83ZhtKkg_nUWQFSVBlCadvrDAuDZag1q8c_VXRvIs-ttdCP7XscSCsK59ddn2WGVRYq5olFpIW5w"
 lor_match_list(server=server,puuid=puuid)
 lor_match_list(server=server,puuid=puuid,format="text")

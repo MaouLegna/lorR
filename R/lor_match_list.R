@@ -11,7 +11,8 @@
 #' *200:3600 - 200 requests every 1 hours   - Developer Key*
 #' *30:10    - 30 requests every 10 seconds - Production Key* (not fixed ratio for all Production Keys)
 #'
-#' @param server a character, must be one of "americas", "asia", "europe". "sea" is not yet supported
+#' @param server a character, must be one of "americas","apac","europe","asia","sea"
+#' Note; asia and sea are going to be removed after the 20th of January 2022
 #' @param puuid a character, string for PUUID, a string of 42char like RGAPI-XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX
 #' @param maxPause a numeric, in case of a call with status 429, what's the max wait it can take? default is 10s.
 #' With a developer key 120 is the suggested.
@@ -29,7 +30,7 @@
 #'
 #' @examples
 #' \dontrun{
-#' server <- "asia"
+#' server <- "apac"
 #' puuid <- "WE83ZhtKkg_nUWQFSVBlCadvrDAuDZag1q8c_VXRvIs-ttdCP7XscSCsK59ddn2WGVRYq5olFpIW5w"
 #' lor_match_list(server=server,puuid=puuid)
 #' lor_match_list(server=server,puuid=puuid,format="text")
@@ -38,15 +39,15 @@ lor_match_list <- function(server,puuid,maxPause=10,wait=T,quiet=F,format="parse
 
 	match.list <- tibble::tibble(match_id = character(),
 															 puuid    = character(),
-															 server   = factor(levels = c("europe","asia","americas"))
+															 server   = factor(levels = c("americas","apac","europe","asia","sea"))
 	)
 
 	# check if the server is an accepted value
-	shards <- c("americas","asia","europe")
+	shards <- c("americas","apac","europe","asia","sea")
 	if ( server %!in% shards ) { stop(glue::glue("Provide a server value among one of these: {glue::glue_collapse(shards,sep = ',')}"),call. = F) }
 
 	path = glue::glue("/lor/match/v1/matches/by-puuid/{puuid}/ids/")
-	APIcall <- lorR::api_call(server = server,path = path,httr::timeout(3),times=3,quiet=FALSE)
+	APIcall <- lorR::api_call(server = server,path = path,quiet=FALSE)
 
 	# check if the APIcall wasn't "safely" done
 	if (is.null(APIcall)) return(NULL)
@@ -63,7 +64,7 @@ lor_match_list <- function(server,puuid,maxPause=10,wait=T,quiet=F,format="parse
 			message(glue::glue("Status {status} - rate limit exceed - Wait for {pause}"))
 			base::system(glue::glue("Sleep {pause}"))
 
-			APIcall <- lorR::api_call(server = server,path = path,httr::timeout(3),times=3,quiet=FALSE)
+			APIcall <- lorR::api_call(server = server,path = path,quiet=FALSE)
 			status <- httr::status_code(APIcall)
 		}
 	}

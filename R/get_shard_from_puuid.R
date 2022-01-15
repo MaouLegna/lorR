@@ -37,7 +37,7 @@ get_shard_from_puuid <- function(puuid,format="parsed") {
 	path = glue::glue("/riot/account/v1/active-shards/by-game/lor/by-puuid/{utils::URLencode(puuid, reserved = T)}")
 
 	# the value of the server is not important when using ACCOUNT methods
-	APIcall <- lorR::api_call(server = "europe",path = path,httr::timeout(3),times=3,quiet=FALSE)
+	APIcall <- lorR::api_call(server = "europe",path = path,quiet=FALSE)
 
 	# check if the APIcall wasn't "safely" done
 	if (is.null(APIcall)) return(NULL)

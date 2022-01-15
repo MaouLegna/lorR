@@ -12,7 +12,8 @@
 #' *X-Method-Rate-Limit": "30:10,500:600 - Developer Key*
 #' *X-Method-Rate-Limit": "500:10,30000:600 - Production Key*
 #'
-#' @param server a character, must be one of "americas", "asia", "europe", "sea"
+#' @param server a character, must be one of "americas","apac","europe","asia","sea"
+#' Note; asia and sea are going to be removed after the 20th of January 2022
 #' @param api_key a character, default is an environment variables called LORAPI which must be set-up.
 #'
 #' @return a character vector
@@ -27,7 +28,7 @@
 lor_leaderboard_dupe <- function(server,api_key = Sys.getenv("LORAPI_KEY")) {
 
 	path <- "/lor/ranked/v1/leaderboards/"
-	APIcall <- api_call(server = server,path = path,httr::timeout(3),times=3,quiet=FALSE)
+	APIcall <- api_call(server = server,path = path,quiet=FALSE)
 
 	# check if the APIcall wasn't "safely" done
 	if (is.null(APIcall)) return(NULL)

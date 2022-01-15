@@ -14,7 +14,8 @@ lor_match_metadata(
 )
 }
 \arguments{
-\item{server}{a character, must be one of "americas", "asia", "europe". "sea" is not yet supported}
+\item{server}{a character, must be one of "americas","apac","europe","asia","sea"
+Note; asia and sea are going to be removed after the 20th of January 2022}
 
 \item{match_id}{a character, string for match_id, a string of 36char}
 
