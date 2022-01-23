@@ -17,7 +17,6 @@
 #' @param maxPause a numeric, in case of a call with status 429, what's the max wait it can take? default is 10s.
 #' With a developer key 120 is the suggested.
 #' @param wait a logical, if TRUE (the default), if the pause is of less or equal to 10s it waits and repeat the call once
-#' @param quiet a logical, Hide errors (FALSE, the default), or display them as they occur?
 #' @param format a character, format of the output, must be:
 #' parsed - tibble of n games rows
 #' text   - as the original json from the API request
@@ -35,7 +34,7 @@
 #' lor_match_list(server=server,puuid=puuid)
 #' lor_match_list(server=server,puuid=puuid,format="text")
 #' }
-lor_match_list <- function(server,puuid,maxPause=10,wait=T,quiet=F,format="parsed") {
+lor_match_list <- function(server,puuid,maxPause=10,wait=T,format="parsed") {
 
 	match.list <- tibble::tibble(match_id = character(),
 															 puuid    = character(),
@@ -47,7 +46,7 @@ lor_match_list <- function(server,puuid,maxPause=10,wait=T,quiet=F,format="parse
 	if ( server %!in% shards ) { stop(glue::glue("Provide a server value among one of these: {glue::glue_collapse(shards,sep = ',')}"),call. = F) }
 
 	path = glue::glue("/lor/match/v1/matches/by-puuid/{puuid}/ids/")
-	APIcall <- lorR::api_call(server = server,path = path,quiet=FALSE)
+	APIcall <- lorR::api_call(server = server,path = path)
 
 	# check if the APIcall wasn't "safely" done
 	if (is.null(APIcall)) return(NULL)
@@ -62,9 +61,9 @@ lor_match_list <- function(server,puuid,maxPause=10,wait=T,quiet=F,format="parse
 		if ( base::as.numeric(pause)<=maxPause ) {
 			# message(glue::glue("The pause is smaller than 10s {check}"))
 			message(glue::glue("Status {status} - rate limit exceed - Wait for {pause}"))
-			base::system(glue::glue("Sleep {pause}"))
+			base::Sys.sleep(pause)
 
-			APIcall <- lorR::api_call(server = server,path = path,quiet=FALSE)
+			APIcall <- lorR::api_call(server = server,path = path)
 			status <- httr::status_code(APIcall)
 		}
 	}

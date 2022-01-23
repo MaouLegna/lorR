@@ -28,7 +28,7 @@
 lor_leaderboard_dupe <- function(server,api_key = Sys.getenv("LORAPI_KEY")) {
 
 	path <- "/lor/ranked/v1/leaderboards/"
-	APIcall <- api_call(server = server,path = path,quiet=FALSE)
+	APIcall <- api_call(server = server,path = path)
 
 	# check if the APIcall wasn't "safely" done
 	if (is.null(APIcall)) return(NULL)

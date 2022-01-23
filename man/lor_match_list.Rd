@@ -4,14 +4,7 @@
 \alias{lor_match_list}
 \title{Get the Match History}
 \usage{
-lor_match_list(
-  server,
-  puuid,
-  maxPause = 10,
-  wait = T,
-  quiet = F,
-  format = "parsed"
-)
+lor_match_list(server, puuid, maxPause = 10, wait = T, format = "parsed")
 }
 \arguments{
 \item{server}{a character, must be one of "americas","apac","europe","asia","sea"
@@ -23,8 +16,6 @@ Note; asia and sea are going to be removed after the 20th of January 2022}
 With a developer key 120 is the suggested.}
 
 \item{wait}{a logical, if TRUE (the default), if the pause is of less or equal to 10s it waits and repeat the call once}
-
-\item{quiet}{a logical, Hide errors (FALSE, the default), or display them as they occur?}
 
 \item{format}{a character, format of the output, must be:
 parsed - tibble of n games rows

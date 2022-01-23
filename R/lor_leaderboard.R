@@ -30,7 +30,7 @@
 lor_leaderboard <- function(server,names=FALSE) {
 
 	path <- "/lor/ranked/v1/leaderboards/"
-	APIcall <- api_call(server = server,path = path,quiet=FALSE)
+	APIcall <- api_call(server = server,path = path)
 
 	# check if the APIcall wasn't "safely" done
 	if (is.null(APIcall)) return(NULL)

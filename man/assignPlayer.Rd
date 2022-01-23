@@ -7,14 +7,13 @@
 assignPlayer(playerMetadata)
 }
 \arguments{
-\item{playerMetadata}{}
+\item{playerMetadata}{\itemize{
+\item player info from a LoR REST API response match metadata
+}}
 }
 \value{
 
 }
 \description{
 Convert LoR-API call player field to a wide tibble
-}
-\examples{
-NA
 }

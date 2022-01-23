@@ -1,12 +1,11 @@
 #' Convert LoR-API call player field to a wide tibble
 #'
-#' @param playerMetadata
+#' @param playerMetadata - player info from a LoR REST API response match metadata
 #'
 #' @return
 #' @export
 #'
 #' @examples
-#' NA
 assignPlayer <- function(playerMetadata) {
 	player.res <- base::data.frame(puuid     = character(),
 																 deck_id   = character(),

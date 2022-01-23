@@ -9,7 +9,6 @@ lor_match_metadata(
   match_id,
   maxPause = 10,
   wait = T,
-  quiet = F,
   format = "parsed"
 )
 }
@@ -23,8 +22,6 @@ Note; asia and sea are going to be removed after the 20th of January 2022}
 With a developer key 120 is the suggested.}
 
 \item{wait}{a logical, if TRUE (the default), if the pause is of less or equal to 10s it waits and repeat the call once}
-
-\item{quiet}{a logical, Hide errors (FALSE, the default), or display them as they occur?}
 
 \item{format}{a character, format of the output, must be:
 parsed - tibble of n row for n match

@@ -34,7 +34,7 @@ get_riotId_from_puuid <- function(puuid,format="parsed") {
 
 	path = glue::glue("/riot/account/v1/accounts/by-puuid/{utils::URLencode(puuid, reserved = T)}")
 	# the value of the server is not important when using ACCOUNT methods
-	APIcall <- lorR::api_call(server = "europe",path = path,quiet=TRUE)
+	APIcall <- lorR::api_call(server = "europe",path = path)
 
 	# check if the APIcall wasn't "safely" done
 	if (is.null(APIcall)) return(NULL)

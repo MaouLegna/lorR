@@ -17,7 +17,6 @@
 #' @param maxPause a numeric, in case of a call with status 429, what's the max wait it can take? default is 10s.
 #' With a developer key 120 is the suggested.
 #' @param wait a logical, if TRUE (the default), if the pause is of less or equal to 10s it waits and repeat the call once
-#' @param quiet a logical, Hide errors (FALSE, the default), or display them as they occur?
 #' @param format a character, format of the output, must be:
 #' parsed - tibble of n row for n match
 #' long   - tibble of p row for each participant in a match
@@ -35,7 +34,7 @@
 #' lor_match_metadata(server=server,match_id=match_id,format="text")
 #' lor_match_metadata(server=server,match_id=match_id,format="long")
 #' }
-lor_match_metadata <- function(server,match_id,maxPause=10,wait=T,quiet=F,format="parsed") {
+lor_match_metadata <- function(server,match_id,maxPause=10,wait=T,format="parsed") {
 
 	# Create the wide tidy table
 	LoR.Metadata <- tibble::tibble(match_key = character(),
@@ -92,7 +91,7 @@ lor_match_metadata <- function(server,match_id,maxPause=10,wait=T,quiet=F,format
 	if ( server %!in% shards ) { stop(glue::glue("Provide a server value among one of these: {glue::glue_collapse(shards,sep = ',')}"),call. = F) }
 
 	path = glue::glue("/lor/match/v1/matches/{match_id}")
-	APIcall <- lorR::api_call(server = server,path = path,quiet=FALSE)
+	APIcall <- lorR::api_call(server = server,path = path)
 
 	# check if the APIcall wasn't "safely" done
 	if (is.null(APIcall)) return(NULL)
@@ -106,9 +105,9 @@ lor_match_metadata <- function(server,match_id,maxPause=10,wait=T,quiet=F,format
 		# In case of the 'standard' rate limit
 		if ( base::as.numeric(pause)<=maxPause ) {
 			message(glue::glue("Status {status} - rate limit exceed - Wait for {pause}"))
-			base::system(glue::glue("Sleep {pause}"))
+			base::Sys.sleep(pause)
 
-			APIcall <- lorR::api_call(server = server,path = path,quiet=FALSE)
+			APIcall <- lorR::api_call(server = server,path = path)
 
 			# check if the APIcall wasn't "safely" done
 			if (is.null(APIcall)) return(NULL)
