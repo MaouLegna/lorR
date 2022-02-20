@@ -4,7 +4,7 @@
 \alias{get_puuid_from_riotId}
 \title{Recover the PUUID from a riotID}
 \usage{
-get_puuid_from_riotId(gameName, tagLine, format = "parsed")
+get_puuid_from_riotId(gameName, tagLine, format = "parsed", ...)
 }
 \arguments{
 \item{gameName}{a character, string for gameName}
@@ -14,6 +14,8 @@ get_puuid_from_riotId(gameName, tagLine, format = "parsed")
 \item{format}{a character, format of the output, must be:
 parsed - as a vector of only the puuid
 text   - as the original json from the API request}
+
+\item{...}{additional paramter for RETRY function, at the moment are timeout, times, pause_base, pause_cap, pause_min,}
 }
 \value{
 depending on the format chosen return the information for the PUUID When encountering a status code different from 200 the output is NA

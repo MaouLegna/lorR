@@ -7,11 +7,11 @@
 api_call(server, path, ..., api_key = Sys.getenv("LORAPI_KEY"))
 }
 \arguments{
-\item{server, }{a character, must be one of "americas", "asia", "europe", "sea"}
+\item{server, }{a character, must be one of americas,europe or sea.}
 
 \item{path}{a character, string containing the path of the methods of choice. Please refer to the \href{https://developer.riotgames.com/apis}{developer portal}}
 
-\item{...}{all arguments accepted by httr::RETRY like: httr::timeout(timeout), times, quiet,}
+\item{...}{additional paramter for RETRY function, at the moment are timeout, times, pause_base, pause_cap, pause_min,}
 
 \item{api_key}{a environment variables.}
 }
@@ -25,6 +25,8 @@ This function helps you handling the REST API for the LoR API methods
 #' Standard RATE LIMITS
 \emph{20 requests every 1 seconds(s) / 100 requests every 2 minutes(s) - Developer Key}
 \emph{500 requests every 10 seconds  / 30,000 requests every 10 minutes - Production Key}
+
+2022-02-20: As a consequences of very long wait and response for Sea I'm testing a different
 }
 \examples{
 \dontrun{

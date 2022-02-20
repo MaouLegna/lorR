@@ -4,13 +4,14 @@
 \alias{lor_leaderboard}
 \title{Return Leaderboard}
 \usage{
-lor_leaderboard(server, names = FALSE)
+lor_leaderboard(server, names = FALSE, ...)
 }
 \arguments{
-\item{server}{a character, must be one of "americas","apac","europe","asia","sea"
-Note; asia and sea are going to be removed after the 20th of January 2022}
+\item{server, }{a character, must be one of americas,europe or sea.}
 
 \item{names}{a logical, is TRUE return only the a vector of players names.}
+
+\item{...}{additional paramter for RETRY function, at the moment are timeout, times, pause_base, pause_cap, pause_min,}
 }
 \value{
 a data frame n x3 with n equal to the number of current Master players

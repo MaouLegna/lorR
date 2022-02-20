@@ -1,16 +1,17 @@
 #' Return the base path for one of Riot's shards
 #'
-#' @param server a character, must be one of "americas","apac","europe","asia","sea"
-#' Note; asia and sea are going to be removed after the 20th of January 2022
+#' @param server a character, must be one of americas,europe or sea.
+#' Apac and Asia are being removed after the completed Shard merge
 #'
 #' @return a character, string containing the url
 #' @export
 #'
 #' @examples
 #' get_path_server("europe")
-#' get_path_server("apac")
+#' get_path_server("sea")
 get_path_server <- function(server) {
-	shards <- c("americas","apac","europe","asia","sea")
+	# shards <- c("americas","apac","europe","asia","sea")
+	shards <- c("americas","europe","sea")
 	if ( server %in% shards ) {
 		base.url <- base::sprintf("https://%s.api.riotgames.com",server)
 	} else {

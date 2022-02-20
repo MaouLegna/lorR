@@ -4,11 +4,10 @@
 \alias{lor_match_list}
 \title{Get the Match History}
 \usage{
-lor_match_list(server, puuid, maxPause = 10, wait = T, format = "parsed")
+lor_match_list(server, puuid, maxPause = 10, wait = T, format = "parsed", ...)
 }
 \arguments{
-\item{server}{a character, must be one of "americas","apac","europe","asia","sea"
-Note; asia and sea are going to be removed after the 20th of January 2022}
+\item{server, }{a character, must be one of americas,europe or sea.}
 
 \item{puuid}{a character, string for PUUID, a string of 42char like RGAPI-XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX}
 
@@ -20,6 +19,8 @@ With a developer key 120 is the suggested.}
 \item{format}{a character, format of the output, must be:
 parsed - tibble of n games rows
 text   - as the original json from the API request}
+
+\item{...}{additional paramter for RETRY function, at the moment are timeout, times, pause_base, pause_cap, pause_min,}
 }
 \value{
 a tibble, contains three variables:

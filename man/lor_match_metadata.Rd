@@ -9,12 +9,12 @@ lor_match_metadata(
   match_id,
   maxPause = 10,
   wait = T,
-  format = "parsed"
+  format = "parsed",
+  ...
 )
 }
 \arguments{
-\item{server}{a character, must be one of "americas","apac","europe","asia","sea"
-Note; asia and sea are going to be removed after the 20th of January 2022}
+\item{server, }{a character, must be one of americas,europe or sea.}
 
 \item{match_id}{a character, string for match_id, a string of 36char}
 
@@ -27,6 +27,8 @@ With a developer key 120 is the suggested.}
 parsed - tibble of n row for n match
 long   - tibble of p row for each participant in a match
 text   - as the original json from the API request}
+
+\item{...}{additional paramter for RETRY function, at the moment are timeout, times, pause_base, pause_cap, pause_min,}
 }
 \value{
 a tibble

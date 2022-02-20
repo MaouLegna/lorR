@@ -4,13 +4,12 @@
 \alias{lor_leaderboard_dupe}
 \title{Return Leaderboard Duplicate}
 \usage{
-lor_leaderboard_dupe(server, api_key = Sys.getenv("LORAPI_KEY"))
+lor_leaderboard_dupe(server, ...)
 }
 \arguments{
-\item{server}{a character, must be one of "americas","apac","europe","asia","sea"
-Note; asia and sea are going to be removed after the 20th of January 2022}
+\item{server, }{a character, must be one of americas,europe or sea.}
 
-\item{api_key}{a character, default is an environment variables called LORAPI which must be set-up.}
+\item{...}{additional paramter for RETRY function, at the moment are timeout, times, pause_base, pause_cap, pause_min,}
 }
 \value{
 a character vector

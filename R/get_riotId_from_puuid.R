@@ -17,6 +17,7 @@
 #' long   - as a tibble with all the elements from the GET request, named column puuid,gameName,tagLine
 #' text   - as the original json from the API request
 #' id     - as the format {gameName}#{tagLine}
+#' @param ... additional paramter for RETRY function, at the moment are timeout, times, pause_base, pause_cap, pause_min,
 #'
 #' @return depending on the format chosen return the information for the RiotID. When encountering a status code different from 200 the output is NA
 #' @export
@@ -30,11 +31,11 @@
 #' badPuuid <- "kJKtE_3i_66edP3lUYSW3wOVxIl5sRKFhsF6IpNIX_RQxYmyBZxG94gNuR4dUe-ofBq_zy5Yll_gST"
 #' get_riotId_from_puuid(badPuuid) # should return a warning
 #' }
-get_riotId_from_puuid <- function(puuid,format="parsed") {
+get_riotId_from_puuid <- function(puuid,format="parsed",...) {
 
 	path = glue::glue("/riot/account/v1/accounts/by-puuid/{utils::URLencode(puuid, reserved = T)}")
 	# the value of the server is not important when using ACCOUNT methods
-	APIcall <- lorR::api_call(server = "europe",path = path)
+	APIcall <- lorR::api_call(server = "europe",path = path,...)
 
 	# check if the APIcall wasn't "safely" done
 	if (is.null(APIcall)) return(NULL)
