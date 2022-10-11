@@ -118,7 +118,8 @@ lor_match_metadata <- function(server,match_id,maxPause=10,wait=T,format="parsed
 		}
 	}
 
-	if ( status != 200 ){
+	# removing the message also for 404 status
+	if ( status %!in% c(200,404) ){
 		message(glue::glue("lor_match_metadata: Status: {status} - Server: {server}
 											 match_id: {match_id}"))
 	}
