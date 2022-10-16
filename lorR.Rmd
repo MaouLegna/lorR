@@ -1,0 +1,139 @@
+---
+title: "R-Package - lorR"
+author: "by Vazzoler Valentino"
+date: "5/11/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Root steps
+
+```{r}
+# create_package("~/Rpck/lorR")
+# dir_info(all = TRUE, regexp = "^[.]git$") |> select(path, type) # <- to check
+# use_mit_license("Vazzoler Valentino") # Licenza basic che mi pare ok
+# load_all() # load_all() simulates the process of building, installing, and attaching the lorR package.
+# use_testthat() # per i test
+
+# usethis::use_git() # will have to restart
+# usethis::use_github()
+# usethis::use_readme_rmd()
+# build_readme()
+
+# check()
+# install()
+```
+
+# Load packages
+
+Load necessary packages
+
+```{r}
+library(devtools)
+# packageVersion("devtools")
+library(tidyverse)
+library(fs)
+library(testthat)
+
+lorR::setAPIkey("RGAPI-0fe70e5f-c91b-4cb4-adae-26380bf73f30")
+```
+
+# Imported Packages
+
+```{r}
+# tidyverse
+usethis::use_package("tibble")
+usethis::use_package("dplyr")
+usethis::use_package("tidyr")
+usethis::use_package("purrr")
+#
+usethis::use_package("httr")
+usethis::use_package("jsonlite")
+usethis::use_package("glue")
+```
+
+# UTILS
+
+```{r notin}
+use_r("notin")
+use_test("notin")
+```
+
+# LOR-UTILS
+
+```{r apikey_setup}
+use_r("setAPIkey")
+use_r("api_call")
+# api_call("europe","/lor/ranked/v1/leaderboards/")
+
+use_r("get_path_server")
+use_test("get_path_server")
+```
+
+# LEADERBOARD v0.4
+
+```{r get_path_server}
+use_r("lor_leaderboard")
+use_r("lor_leaderboard_dupe")
+```
+
+# ACCOUNT v0.4
+
+```{r}
+# server <- "europe"
+# puuid <- "kJKtE_3i_66edP3lUYSW3wOVxIl5sRKFhsF6IpNIX_RQxYmyBZxG94gNuR4dUe-ofBq_zy5Yll_gSw"
+
+use_r("get_puuid_from_riotId")
+# get_puuid_from_riotId(gameName = "MaouLegna",tagLine = "STAT")
+# get_puuid_from_riotId(gameName = "MaouLegna",tagLine = "STAT",format = "text")
+use_r("get_riotId_from_puuid")
+# get_riotId_from_puuid("kJKtE_3i_66edP3lUYSW3wOVxIl5sRKFhsF6IpNIX_RQxYmyBZxG94gNuR4dUe-ofBq_zy5Yll_gSw")
+use_r("get_shard_from_puuid")
+# get_shard_from_puuid("kJKtE_3i_66edP3lUYSW3wOVxIl5sRKFhsF6IpNIX_RQxYmyBZxG94gNuR4dUe-ofBq_zy5Yll_gSw")
+
+use_r("newPuuids")
+```
+
+# MATCH v0.4
+
+```{r}
+use_r("lor_match_list")
+# lor_match_list(server=server,puuid=puuid,format="text")
+use_r("assignPlayer")
+use_r("assignMatch")
+use_r("lor_match_metadata")
+```
+
+
+# TRY
+
+```{r}
+load_all()
+# lorR::lor_leaderboard("europe",names = T)
+document()
+
+check()
+test()
+
+lorR::setAPIkey("RGAPI-0fe70e5f-c91b-4cb4-adae-26380bf73f30")
+lorR::get_puuid_from_riotId(gameName = "MaouLegna",tagLine = "STAT")
+lorR::lor_match_metadata(server = "apac",match_id = "m3GL-KCqWwFsZ3VMg4alKWkbLNjV9gt8i6LrlCx5VDQ0tUNaevADIWTlfn1lkJK0Bvt8g8JQUNB5ug")
+
+# lor_match_list() Status: 403 - Server: asia
+# Puuid: 
+
+# RStudio exposes similar functionality in the Build menu and in the Build pane via Install and Restart.
+
+# install() 
+# library(lorR)
+# devtools::install_github("MaouLegna/lorR")
+
+# lorR::get_riotId_from_puuid("kJKtE_3i_66edP3lUYSW3wOVxIl5sRKFhsF6IpNIX_RQxYmyBZxG94gNuR4dUe-ofBq_zy5Yll_gST")
+# remove.packages("lorR")
+# lorR::setAPIkey("RGAPI-0fe70e5f-c91b-4cb4-adae-26380bf73f30")
+# build_readme()
+# use_mit_license("Vazzoler Valentino")
+```

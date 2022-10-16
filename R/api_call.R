@@ -31,11 +31,11 @@ api_call <- function(server,path,...,api_key = Sys.getenv("LORAPI_KEY") ) {
 	args <- list(...)
 	if ("timeout" %in% names(args)) {
 		timeout <- args$timeout
-	} else timeout <- 3
+	} else timeout <- 10
 
 	if ("times" %in% names(args)) {
 		times <- args$times
-	} else times <- 2
+	} else times <- 3
 
 	if ("pause_base" %in% names(args)) {
 		pause_base <- args$pause_base
