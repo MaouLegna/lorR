@@ -4,12 +4,12 @@
 \alias{newPuuids}
 \title{Search for new PUUID}
 \usage{
-newPuuids(LoR.Account.df, LoR.Match.df)
+newPuuids(account_tbl, match_tbl)
 }
 \arguments{
-\item{LoR.Account.df}{a tidy data frame, containing a column called \strong{puuid}}
+\item{account_tbl}{a tidy data frame, containing a column called \strong{puuid}}
 
-\item{LoR.Match.df}{a tidy data frame, containing column(s) containng \strong{puuid} and one called \strong{game_mode}}
+\item{match_tbl}{a tidy data frame, containing column(s) containng \strong{puuid} and one called \strong{game_mode}}
 }
 \value{
 a vector of character, containing the puuid in the matches dataframe not already present in the account data frame
@@ -19,18 +19,17 @@ Check if there are any new PUUID from several game modes (those not against bot)
 "Constructed","SeasonalTournamentLobby","Bo3ChallengeLobby","StandardGauntletLobby","LastCallQualifierGauntletLobby"
 }
 \examples{
-
-Example.Account.df = data.frame(
+ex_account = data.frame(
 	gameName = c("Pippo","Pluto"),
 	puuid = c("defg","wxyz")
 )
 
-Example.Match.df = data.frame(
+ex_match = data.frame(
 	game_mode = c("Constructed","Constructed","AI"),
 	puuid_1 = c("abcd","defg","mnop"),
 	puuid_2 = c("defg","hijk","bot1"),
 	puuid_3 = c("wxyz",NA,NA),
 	puuid_4 = c(NA,NA,NA)
 )
-newPuuids(LoR.Account.df = Example.Account.df, LoR.Match.df = Example.Match.df)
+newPuuids(account_tbl = ex_account, match_tbl = ex_match)
 }

@@ -16,6 +16,7 @@
 #' parsed - as a vector of only the puuid
 #' long   - as a tibble with all the elements from the GET request, named column puuid,game,activeShard
 #' text   - as the original json from the API request#'
+#' @param verbose should be function be verbose and print messages
 #' @param ... additional paramter for RETRY function, at the moment are timeout, times, pause_base, pause_cap, pause_min,
 #'
 #' @return depending on the format chosen return the information for the RiotID. When encountering a status code different from 200 the output is NA
@@ -34,7 +35,7 @@
 #' badPuuid <- "kJKtE_3i_66edP3lUYSW3wOVxIl5sRKFhsF6IpNIX_RQxYmyBZxG94gNuR4dUe-ofBq_zy5Yll_gST"
 #' get_shard_from_puuid(badPuuid) # should return a warning
 #' }
-get_shard_from_puuid <- function(puuid,format="parsed",...) {
+get_shard_from_puuid <- function(puuid,format="parsed",verbose=T,...) {
 
 	path = glue::glue("/riot/account/v1/active-shards/by-game/lor/by-puuid/{utils::URLencode(puuid, reserved = T)}")
 
@@ -46,12 +47,12 @@ get_shard_from_puuid <- function(puuid,format="parsed",...) {
 
 	status <- httr::status_code(APIcall)
 
-	if (status == 429) { message(glue::glue("Status {status} Wait for {APIcall$headers$`retry-after`}")) }
-	if (status %!in% c(200,429)) { warning(glue::glue("Status {status} with puuid: {puuid}")) }
+	if (status == 429 & verbose) { message(glue::glue("Status {status} Wait for {APIcall$headers$`retry-after`}")) }
+	if (status %!in% c(200,429) & verbose ) { warning(glue::glue("Status {status} with puuid: {puuid}")) }
 	if (status == 200) {
 		switch(
 			format,
-			"parsed" = unlist(httr::content(APIcall, as= "parsed"),use.names = F)[-1],
+			"parsed" = httr::content(APIcall, as= "parsed"),
 			"long"   = tibble::as_tibble(jsonlite::fromJSON(httr::content(APIcall, as= "text"))),
 			"text"   = httr::content(APIcall, as= "text")
 		)

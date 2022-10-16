@@ -12,7 +12,7 @@
 #' *X-Method-Rate-Limit": "30:10,500:600 - Developer Key*
 #' *X-Method-Rate-Limit": "500:10,30000:600 - Production Key*
 #'
-#' @param server, a character, must be one of americas,europe or sea.
+#' @param server, a character, must be one of americas,europe,sea or asia,apac
 #' @param names a logical, is TRUE return only the a vector of players names.
 #' @param ... additional paramter for RETRY function, at the moment are timeout, times, pause_base, pause_cap, pause_min,
 #'

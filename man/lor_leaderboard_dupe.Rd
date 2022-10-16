@@ -7,7 +7,7 @@
 lor_leaderboard_dupe(server, ...)
 }
 \arguments{
-\item{server, }{a character, must be one of americas,europe or sea.}
+\item{server, }{a character, must be one of americas,europe,sea or asia,apac}
 
 \item{...}{additional paramter for RETRY function, at the moment are timeout, times, pause_base, pause_cap, pause_min,}
 }

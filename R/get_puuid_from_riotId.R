@@ -36,8 +36,8 @@ get_puuid_from_riotId <- function(gameName,tagLine,format="parsed",...) {
 
 	status <- httr::status_code(APIcall)
 
-	if (status == 429) { message(glue::glue("Status {status} Wait for {APIcall$headers$`retry-after`}")) }
-	if (status %!in% c(200,429)) { warning(glue::glue("Status {status} with gameName: {gameName} and tagLine: {tagLine}")) }
+	if (status == 429 & verbose) { message(glue::glue("Status {status} Wait for {APIcall$headers$`retry-after`}")) }
+	if (status %!in% c(200,429) & verbose) { warning(glue::glue("Status {status} with gameName: {gameName} and tagLine: {tagLine}")) }
 	if (status == 200) {
 		switch(
 			format,

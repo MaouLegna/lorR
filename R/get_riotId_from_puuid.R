@@ -47,7 +47,7 @@ get_riotId_from_puuid <- function(puuid,format="parsed",...) {
 	if (status == 200) {
 		switch(
 			format,
-			"parsed" = unlist(httr::content(APIcall, as= "parsed"),use.names = F)[-1],  # all the elements -> into vector -> remove the puuid which is the first value
+			"parsed" = httr::content(APIcall, as= "parsed"),
 			"long"   = tibble::as_tibble(jsonlite::fromJSON(httr::content(APIcall, as= "text"))),
 			"text"   = httr::content(APIcall, as= "text"),
 			"id"     = { res <- unlist(httr::content(APIcall, as= "parsed"),use.names = F)[-1];

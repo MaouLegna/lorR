@@ -9,3 +9,6 @@
 \description{
 Negate the result on a 'in' operation
 }
+\examples{
+"a" \%!in\% c("a","b","c")
+}

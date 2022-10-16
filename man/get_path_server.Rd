@@ -7,8 +7,8 @@
 get_path_server(server)
 }
 \arguments{
-\item{server}{a character, must be one of americas,europe or sea.
-Apac and Asia are being removed after the completed Shard merge}
+\item{server}{a character, must be one of americas,europe,sea,apac,asia
+In case of apac or asia che request will be redirected to sea. Old games from asia and apac are no longer available}
 }
 \value{
 a character, string containing the url

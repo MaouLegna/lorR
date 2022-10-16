@@ -58,26 +58,26 @@ usethis::use_package("glue")
 # UTILS
 
 ```{r notin}
-use_r("notin")
-use_test("notin")
+usethis::use_r("notin")
+# use_test("notin")
 ```
 
 # LOR-UTILS
 
 ```{r apikey_setup}
-use_r("setAPIkey")
-use_r("api_call")
+usethis::use_r("setAPIkey")
+usethis::use_r("api_call")
 # api_call("europe","/lor/ranked/v1/leaderboards/")
 
-use_r("get_path_server")
+usethis::use_r("get_path_server")
 use_test("get_path_server")
 ```
 
 # LEADERBOARD v0.4
 
 ```{r get_path_server}
-use_r("lor_leaderboard")
-use_r("lor_leaderboard_dupe")
+usethis::use_r("lor_leaderboard")
+usethis::use_r("lor_leaderboard_dupe")
 ```
 
 # ACCOUNT v0.4
@@ -86,37 +86,41 @@ use_r("lor_leaderboard_dupe")
 # server <- "europe"
 # puuid <- "kJKtE_3i_66edP3lUYSW3wOVxIl5sRKFhsF6IpNIX_RQxYmyBZxG94gNuR4dUe-ofBq_zy5Yll_gSw"
 
-use_r("get_puuid_from_riotId")
+usethis::use_r("get_puuid_from_riotId")
 # get_puuid_from_riotId(gameName = "MaouLegna",tagLine = "STAT")
 # get_puuid_from_riotId(gameName = "MaouLegna",tagLine = "STAT",format = "text")
-use_r("get_riotId_from_puuid")
+usethis::use_r("get_riotId_from_puuid")
 # get_riotId_from_puuid("kJKtE_3i_66edP3lUYSW3wOVxIl5sRKFhsF6IpNIX_RQxYmyBZxG94gNuR4dUe-ofBq_zy5Yll_gSw")
-use_r("get_shard_from_puuid")
+usethis::use_r("get_shard_from_puuid")
 # get_shard_from_puuid("kJKtE_3i_66edP3lUYSW3wOVxIl5sRKFhsF6IpNIX_RQxYmyBZxG94gNuR4dUe-ofBq_zy5Yll_gSw")
 
-use_r("newPuuids")
+usethis::use_r("newPuuids")
+
+usethis::use_r("possible_riotId")
+usethis::use_r("possible_shard")
+usethis::use_r("get_account_by_puuid")
 ```
 
 # MATCH v0.4
 
 ```{r}
-use_r("lor_match_list")
+usethis::use_r("lor_match_list")
 # lor_match_list(server=server,puuid=puuid,format="text")
-use_r("assignPlayer")
-use_r("assignMatch")
-use_r("lor_match_metadata")
+usethis::use_r("assignPlayer")
+usethis::use_r("assignMatch")
+usethis::use_r("lor_match_metadata")
 ```
 
 
 # TRY
 
 ```{r}
-load_all()
+devtools::load_all()
 # lorR::lor_leaderboard("europe",names = T)
-document()
+devtools::document()
 
-check()
-test()
+devtools::check()
+devtools::test()
 
 lorR::setAPIkey("RGAPI-0fe70e5f-c91b-4cb4-adae-26380bf73f30")
 lorR::get_puuid_from_riotId(gameName = "MaouLegna",tagLine = "STAT")

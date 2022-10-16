@@ -7,7 +7,7 @@
 lor_leaderboard(server, names = FALSE, ...)
 }
 \arguments{
-\item{server, }{a character, must be one of americas,europe or sea.}
+\item{server, }{a character, must be one of americas,europe,sea or asia,apac}
 
 \item{names}{a logical, is TRUE return only the a vector of players names.}
 

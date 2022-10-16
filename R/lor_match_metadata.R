@@ -11,15 +11,16 @@
 #' *100:3600 - 200 requests every 1 hours   - Developer Key*
 #' *30:10    - 30 requests every 10 seconds - Production Key* (not fixed ratio for all Production Keys)
 #'
-#' @param server, a character, must be one of americas,europe or sea.
+#' @param server, a character, must be one of americas,europe,sea or asia,apac
 #' @param match_id a character, string for match_id, a string of 36char
 #' @param maxPause a numeric, in case of a call with status 429, what's the max wait it can take? default is 10s.
 #' With a developer key 120 is the suggested.
 #' @param wait a logical, if TRUE (the default), if the pause is of less or equal to 10s it waits and repeat the call once
 #' @param format a character, format of the output, must be:
-#' parsed - tibble of n row for n match
-#' long   - tibble of p row for each participant in a match
-#' text   - as the original json from the API request
+#' parsed: tibble of n row for n match
+#' long: tibble of p row for each participant in a match
+#' text: as the original json from the API request
+#' @param verbose should be function be verbose and print messages
 #' @param ... additional paramter for RETRY function, at the moment are timeout, times, pause_base, pause_cap, pause_min,
 #'
 #' @return a tibble
@@ -34,10 +35,10 @@
 #' lor_match_metadata(server=server,match_id=match_id,format="text")
 #' lor_match_metadata(server=server,match_id=match_id,format="long")
 #' }
-lor_match_metadata <- function(server,match_id,maxPause=10,wait=T,format="parsed",...) {
+lor_match_metadata <- function(server,match_id,format="parsed",maxPause=10,wait=T,verbose=T,...) {
 
 	# Create the wide tidy table
-	LoR.Metadata <- tibble::tibble(match_key = character(),
+	match_metadata<-tibble::tibble(match_key = character(),
 																 server = character(),
 																 data_version = character(),
 																 match_id = character(),
@@ -104,7 +105,7 @@ lor_match_metadata <- function(server,match_id,maxPause=10,wait=T,format="parsed
 
 		# In case of the 'standard' rate limit
 		if ( base::as.numeric(pause)<=maxPause ) {
-			message(glue::glue("Status {status} - rate limit exceed - Wait for {pause}"))
+			if (verbose) message(glue::glue("Status {status} - rate limit exceed - Wait for {pause}"))
 			base::Sys.sleep(pause)
 
 			APIcall <- lorR::api_call(server = server,path = path,...)
@@ -119,7 +120,7 @@ lor_match_metadata <- function(server,match_id,maxPause=10,wait=T,format="parsed
 	}
 
 	# removing the message also for 404 status
-	if ( status %!in% c(200,404) ){
+	if ( status %!in% c(200,404) & verbose ){
 		message(glue::glue("lor_match_metadata: Status: {status} - Server: {server}
 											 match_id: {match_id}"))
 	}
@@ -127,17 +128,19 @@ lor_match_metadata <- function(server,match_id,maxPause=10,wait=T,format="parsed
 	switch(
 		format,
 		"parsed" = {
-			LoR.Metadata |>
+			APIcall |> assignMatch() |> unlist()
+		},
+		"tbl" = {
+			match_metadata |>
 				tibble::add_row(
 					#
 					match_key = match_id,
 					server = server,
 					# content from the API GET()
-					APIcall |> assignMatch()
 				)
 		},
 		"long" = {
-			res <- LoR.Metadata |>
+			res <- match_metadata |>
 				tibble::add_row(
 					#
 					match_key = match_id,
@@ -147,7 +150,8 @@ lor_match_metadata <- function(server,match_id,maxPause=10,wait=T,format="parsed
 				) |>
 				tidyr::pivot_longer(cols = c(dplyr::ends_with("_1"),dplyr::ends_with("_2"),dplyr::ends_with("_3"),dplyr::ends_with("_4") ),
 										 names_to = c(".value"),
-										 names_pattern = "(.*)_[0-9]"
+										 names_pattern = "(.*)_[0-9]",
+										 values_drop_na = TRUE
 				)
 			if ( status != 200 ) {
 				res |>

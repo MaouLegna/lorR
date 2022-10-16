@@ -8,7 +8,7 @@
 #'
 #' 2022-02-20: As a consequences of very long wait and response for Sea I'm testing a different
 #'
-#' @param server, a character, must be one of americas,europe or sea.
+#' @param server, a character, must be one of americas,europe,sea or asia,apac
 #' @param path a character, string containing the path of the methods of choice. Please refer to the \href{https://developer.riotgames.com/apis}{developer portal}
 #' @param api_key a environment variables.
 #' @param ... additional paramter for RETRY function, at the moment are timeout, times, pause_base, pause_cap, pause_min,

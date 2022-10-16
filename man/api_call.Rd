@@ -7,7 +7,7 @@
 api_call(server, path, ..., api_key = Sys.getenv("LORAPI_KEY"))
 }
 \arguments{
-\item{server, }{a character, must be one of americas,europe or sea.}
+\item{server, }{a character, must be one of americas,europe,sea or asia,apac}
 
 \item{path}{a character, string containing the path of the methods of choice. Please refer to the \href{https://developer.riotgames.com/apis}{developer portal}}
 

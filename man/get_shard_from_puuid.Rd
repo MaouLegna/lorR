@@ -4,7 +4,7 @@
 \alias{get_shard_from_puuid}
 \title{Recover the activeShard from a PUUID}
 \usage{
-get_shard_from_puuid(puuid, format = "parsed", ...)
+get_shard_from_puuid(puuid, format = "parsed", verbose = T, ...)
 }
 \arguments{
 \item{puuid}{a character, string for PUUID, a string of 42char like RGAPI-XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX}
@@ -13,6 +13,8 @@ get_shard_from_puuid(puuid, format = "parsed", ...)
 parsed - as a vector of only the puuid
 long   - as a tibble with all the elements from the GET request, named column puuid,game,activeShard
 text   - as the original json from the API request#'}
+
+\item{verbose}{should be function be verbose and print messages}
 
 \item{...}{additional paramter for RETRY function, at the moment are timeout, times, pause_base, pause_cap, pause_min,}
 }

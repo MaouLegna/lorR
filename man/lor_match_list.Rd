@@ -4,21 +4,32 @@
 \alias{lor_match_list}
 \title{Get the Match History}
 \usage{
-lor_match_list(server, puuid, maxPause = 10, wait = T, format = "parsed", ...)
+lor_match_list(
+  server,
+  puuid,
+  format = "parsed",
+  maxPause = 10,
+  wait = T,
+  verbose = T,
+  ...
+)
 }
 \arguments{
-\item{server, }{a character, must be one of americas,europe or sea.}
+\item{server, }{a character, must be one of americas,europe,sea or asia,apac}
 
 \item{puuid}{a character, string for PUUID, a string of 42char like RGAPI-XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX}
+
+\item{format}{a character, format of the output, must be:
+parsed: vector of games
+tbl: wide tibble of n games rows
+text: as the original json from the API request}
 
 \item{maxPause}{a numeric, in case of a call with status 429, what's the max wait it can take? default is 10s.
 With a developer key 120 is the suggested.}
 
 \item{wait}{a logical, if TRUE (the default), if the pause is of less or equal to 10s it waits and repeat the call once}
 
-\item{format}{a character, format of the output, must be:
-parsed - tibble of n games rows
-text   - as the original json from the API request}
+\item{verbose}{should be function be verbose and print messages}
 
 \item{...}{additional paramter for RETRY function, at the moment are timeout, times, pause_base, pause_cap, pause_min,}
 }
@@ -45,8 +56,8 @@ Method RATE LIMITS
 }
 \examples{
 \dontrun{
-server <- "apac"
-puuid <- "WE83ZhtKkg_nUWQFSVBlCadvrDAuDZag1q8c_VXRvIs-ttdCP7XscSCsK59ddn2WGVRYq5olFpIW5w"
+server <- "europe"
+puuid <- "kJKtE_3i_66edP3lUYSW3wOVxIl5sRKFhsF6IpNIX_RQxYmyBZxG94gNuR4dUe-ofBq_zy5Yll_gSw"
 lor_match_list(server=server,puuid=puuid)
 lor_match_list(server=server,puuid=puuid,format="text")
 }
