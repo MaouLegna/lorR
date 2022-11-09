@@ -110,6 +110,10 @@ usethis::use_r("lor_match_list")
 usethis::use_r("assignPlayer")
 usethis::use_r("assignMatch")
 usethis::use_r("lor_match_metadata")
+
+# server <-  "europe"
+# match_id <- "44a130ae-12f4-45f8-8a24-0b319265d616"
+# lor_match_metadata(server=server,match_id=match_id)
 ```
 
 

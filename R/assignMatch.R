@@ -4,8 +4,6 @@
 #'
 #' @return a dataframe with the metadata of a match
 #'
-#' @examples
-#' NA
 assignMatch <- function(APIcall) {
 
 	out <- tryCatch({
@@ -76,10 +74,10 @@ assignMatch <- function(APIcall) {
 
 			nPlayer <- base::NROW(metadataList$info$players)
 
-			if (nPlayer >= 1 ) { res[1,c("puuid_1","deck_id_1","deck_code_1","factions_1","game_outcome_1","order_of_play_1")] <- lorR::assignPlayer(metadataList$info$players[1,]) |> base::as.list() }
-			if (nPlayer >= 2 ) { res[1,c("puuid_2","deck_id_2","deck_code_2","factions_2","game_outcome_2","order_of_play_2")] <- lorR::assignPlayer(metadataList$info$players[2,]) |> base::as.list() }
-			if (nPlayer >= 3 ) { res[1,c("puuid_3","deck_id_3","deck_code_3","factions_3","game_outcome_3","order_of_play_3")] <- lorR::assignPlayer(metadataList$info$players[3,]) |> base::as.list() }
-			if (nPlayer == 4 ) { res[1,c("puuid_4","deck_id_4","deck_code_4","factions_4","game_outcome_4","order_of_play_4")] <- lorR::assignPlayer(metadataList$info$players[4,]) |> base::as.list() }
+			if (nPlayer >= 1 ) { res[1,c("puuid_1","deck_id_1","deck_code_1","factions_1","game_outcome_1","order_of_play_1")] <- assignPlayer(metadataList$info$players[1,]) |> base::as.list() }
+			if (nPlayer >= 2 ) { res[1,c("puuid_2","deck_id_2","deck_code_2","factions_2","game_outcome_2","order_of_play_2")] <- assignPlayer(metadataList$info$players[2,]) |> base::as.list() }
+			if (nPlayer >= 3 ) { res[1,c("puuid_3","deck_id_3","deck_code_3","factions_3","game_outcome_3","order_of_play_3")] <- assignPlayer(metadataList$info$players[3,]) |> base::as.list() }
+			if (nPlayer == 4 ) { res[1,c("puuid_4","deck_id_4","deck_code_4","factions_4","game_outcome_4","order_of_play_4")] <- assignPlayer(metadataList$info$players[4,]) |> base::as.list() }
 		}
 		res |> tibble::as_tibble()
 	},
