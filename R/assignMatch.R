@@ -2,8 +2,7 @@
 #'
 #' @param APIcall - a REST API response
 #'
-#' @return a tibble
-#' @export
+#' @return a dataframe with the metadata of a match
 #'
 #' @examples
 #' NA

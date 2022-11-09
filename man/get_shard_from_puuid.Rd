@@ -4,10 +4,18 @@
 \alias{get_shard_from_puuid}
 \title{Recover the activeShard from a PUUID}
 \usage{
-get_shard_from_puuid(puuid, format = "parsed", verbose = T, ...)
+get_shard_from_puuid(
+  puuid,
+  server = "americas",
+  format = "parsed",
+  verbose = T,
+  ...
+)
 }
 \arguments{
 \item{puuid}{a character, string for PUUID, a string of 42char like RGAPI-XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX}
+
+\item{server}{a character, must be one of americas,europe,sea or asia,apac}
 
 \item{format}{format of the output:
 parsed - as a vector of only the puuid

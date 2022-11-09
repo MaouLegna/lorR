@@ -9,3 +9,4 @@ possible_riotId(...)
 \description{
 purrr possible of get_riotId_from_puuid
 }
+\keyword{internal}

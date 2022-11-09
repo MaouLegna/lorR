@@ -9,18 +9,21 @@
 #' *1000 requests every 1 minutes - Developer Key*
 #' *1000 requests every 1 minutes - Production Key*
 #'
+#' @param server a character, must be one of americas,europe,sea or asia,apac
 #' @param puuid a character, string for PUUID, a string of 42char like RGAPI-XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX
+#'
+#' @export
 #'
 #' @examples \dontrun{
 #' puuid <- "kJKtE_3i_66edP3lUYSW3wOVxIl5sRKFhsF6IpNIX_RQxYmyBZxG94gNuR4dUe-ofBq_zy5Yll_gSw"
 #' get_account_by_puuid(puuid = puuid)
 #' }
-get_account_by_puuid <- function(puuid) {
+get_account_by_puuid <- function(puuid,server="americas") {
 
-	riotdId <- possible_riotId(puuid, "parsed")
+	riotdId <- possible_riotId(puuid,server=server, "parsed")
 	if (is.null(riotdId)) riotdId <- list( "gameName" = NA_character_,
 																			 "tagLine"  = NA_character_ )
-	shard  <- possible_shard(puuid, "parsed")
+	shard  <- possible_shard(puuid,server=server, "parsed")
 	if (is.null(shard)) shard  <- list( "game" = NA_character_,
 																			"activeShard"  = NA_character_ )
 

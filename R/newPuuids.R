@@ -26,9 +26,9 @@
 newPuuids <- function(account_tbl, match_tbl) {
 	match_tbl |>
 		dplyr::filter(game_mode %in% c("Constructed", "SeasonalTournamentLobby","Bo3ChallengeLobby", "StandardGauntletLobby","LastCallQualifierGauntletLobby") ) |>
-		dplyr::select(contains("puuid")) |>
-		tidyr::pivot_longer(cols = contains("puuid"),values_to = "puuid") |>
+		dplyr::select(dplyr::contains("puuid")) |>
+		tidyr::pivot_longer(cols = dplyr::contains("puuid"),values_to = "puuid") |>
 		tidyr::drop_na() |>
-		dplyr::filter( !(puuid %in% account_tbl$puuid) ) |>
-		dplyr::pull( puuid )
+		dplyr::filter(!(puuid %in% account_tbl$puuid) ) |>
+		dplyr::pull(puuid )
 }

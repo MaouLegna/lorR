@@ -4,10 +4,12 @@
 \alias{get_riotId_from_puuid}
 \title{Recover the riotID from a PUUID}
 \usage{
-get_riotId_from_puuid(puuid, format = "parsed", ...)
+get_riotId_from_puuid(puuid, server = "americas", format = "parsed", ...)
 }
 \arguments{
-\item{puuid}{a character, string for PUUID, a string of 42char like RGAPI-XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX}
+\item{puuid}{}
+
+\item{server}{a character, must be one of americas,europe,sea or asia,apac}
 
 \item{format}{format of the output:
 parsed - as a vector of only the puuid

@@ -39,6 +39,7 @@ library(fs)
 library(testthat)
 
 lorR::setAPIkey("RGAPI-0fe70e5f-c91b-4cb4-adae-26380bf73f30")
+devtools::load_all()
 ```
 
 # Imported Packages
@@ -70,7 +71,7 @@ usethis::use_r("api_call")
 # api_call("europe","/lor/ranked/v1/leaderboards/")
 
 usethis::use_r("get_path_server")
-use_test("get_path_server")
+usethis::use_test("get_path_server")
 ```
 
 # LEADERBOARD v0.4

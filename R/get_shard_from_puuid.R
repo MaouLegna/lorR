@@ -18,6 +18,7 @@
 #' text   - as the original json from the API request#'
 #' @param verbose should be function be verbose and print messages
 #' @param ... additional paramter for RETRY function, at the moment are timeout, times, pause_base, pause_cap, pause_min,
+#' @param server a character, must be one of americas,europe,sea or asia,apac
 #'
 #' @return depending on the format chosen return the information for the RiotID. When encountering a status code different from 200 the output is NA
 #' the game value should be "lor"
@@ -35,12 +36,16 @@
 #' badPuuid <- "kJKtE_3i_66edP3lUYSW3wOVxIl5sRKFhsF6IpNIX_RQxYmyBZxG94gNuR4dUe-ofBq_zy5Yll_gST"
 #' get_shard_from_puuid(badPuuid) # should return a warning
 #' }
-get_shard_from_puuid <- function(puuid,format="parsed",verbose=T,...) {
+get_shard_from_puuid <- function(puuid,server="americas",format="parsed",verbose=T,...) {
+
+	# check if the server is an accepted value
+	shards <- c("americas","apac","europe","asia","sea")
+	if ( server %!in% shards ) { stop(glue::glue("Provide a server value among one of these: {glue::glue_collapse(shards,sep = ',')}"),call. = F) }
 
 	path = glue::glue("/riot/account/v1/active-shards/by-game/lor/by-puuid/{utils::URLencode(puuid, reserved = T)}")
 
 	# the value of the server is not important when using ACCOUNT methods
-	APIcall <- lorR::api_call(server = "europe",path = path,...)
+	APIcall <- api_call(server = server,path = path,...)
 
 	# check if the APIcall wasn't "safely" done
 	if (is.null(APIcall)) return(NULL)

@@ -12,7 +12,7 @@ assignMatch(APIcall)
 }}
 }
 \value{
-a tibble
+a dataframe with the metadata of a match
 }
 \description{
 Convert LoR-API call to a wide tibble

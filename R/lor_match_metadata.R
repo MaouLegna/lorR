@@ -92,7 +92,7 @@ lor_match_metadata <- function(server,match_id,format="parsed",maxPause=10,wait=
 	if ( server %!in% shards ) { stop(glue::glue("Provide a server value among one of these: {glue::glue_collapse(shards,sep = ',')}"),call. = F) }
 
 	path = glue::glue("/lor/match/v1/matches/{match_id}")
-	APIcall <- lorR::api_call(server = server,path = path,...)
+	APIcall <- api_call(server = server,path = path,...)
 
 	# check if the APIcall wasn't "safely" done
 	if (is.null(APIcall)) return(NULL)
@@ -108,7 +108,7 @@ lor_match_metadata <- function(server,match_id,format="parsed",maxPause=10,wait=
 			if (verbose) message(glue::glue("Status {status} - rate limit exceed - Wait for {pause}"))
 			base::Sys.sleep(pause)
 
-			APIcall <- lorR::api_call(server = server,path = path,...)
+			APIcall <- api_call(server = server,path = path,...)
 
 			# check if the APIcall wasn't "safely" done
 			if (is.null(APIcall)) return(NULL)

@@ -4,7 +4,6 @@
 #' In case of apac or asia che request will be redirected to sea. Old games from asia and apac are no longer available
 #'
 #' @return a character, string containing the url
-#' @export
 #'
 #' @examples
 #' get_path_server("europe")

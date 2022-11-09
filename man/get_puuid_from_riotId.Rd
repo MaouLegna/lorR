@@ -4,10 +4,18 @@
 \alias{get_puuid_from_riotId}
 \title{Recover the PUUID from a riotID}
 \usage{
-get_puuid_from_riotId(gameName, tagLine, format = "parsed", ...)
+get_puuid_from_riotId(
+  gameName,
+  server = "americas",
+  tagLine,
+  format = "parsed",
+  ...
+)
 }
 \arguments{
 \item{gameName}{a character, string for gameName}
+
+\item{server}{a character, must be one of americas,europe,sea or asia,apac}
 
 \item{tagLine}{a character, string for tagLine}
 

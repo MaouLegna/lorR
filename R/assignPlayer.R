@@ -2,10 +2,8 @@
 #'
 #' @param playerMetadata - player info from a LoR REST API response match metadata
 #'
-#' @return
-#' @export
+#' @return a dataframe with the players info in a match
 #'
-#' @examples
 assignPlayer <- function(playerMetadata) {
 	player.res <- base::data.frame(puuid     = character(),
 																 deck_id   = character(),

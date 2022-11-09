@@ -17,6 +17,7 @@
 #' parsed - as a vector of only the puuid
 #' text   - as the original json from the API request
 #' @param ... additional paramter for RETRY function, at the moment are timeout, times, pause_base, pause_cap, pause_min,
+#' @param server a character, must be one of americas,europe,sea or asia,apac
 #'
 #' @return depending on the format chosen return the information for the PUUID When encountering a status code different from 200 the output is NA
 #' @export
@@ -25,11 +26,15 @@
 #' \dontrun{
 #' lorR::get_puuid_from_riotId(gameName = "MaouLegna",tagLine = "STAT")
 #' }
-get_puuid_from_riotId <- function(gameName,tagLine,format="parsed",...) {
+get_puuid_from_riotId <- function(gameName,server="americas",tagLine,format="parsed",...) {
+
+	# check if the server is an accepted value
+	shards <- c("americas","apac","europe","asia","sea")
+	if ( server %!in% shards ) { stop(glue::glue("Provide a server value among one of these: {glue::glue_collapse(shards,sep = ',')}"),call. = F) }
 
 	path = glue::glue("/riot/account/v1/accounts/by-riot-id/{utils::URLencode(gameName, reserved = T)}/{utils::URLencode(tagLine, reserved = T)}")
 	# the value of the server is not important when using ACCOUNT methods
-	APIcall <- api_call(server = "europe",path = path,...)
+	APIcall <- api_call(server = server,path = path,...)
 
 	# check if the APIcall wasn't "safely" done
 	if (is.null(APIcall)) return(NULL)

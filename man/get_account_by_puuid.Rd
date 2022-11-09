@@ -5,10 +5,12 @@
 \title{Given the primary key, a puuid, return all the ACCOUNT-V1 info
 Wraps the \href{"https://developer.riotgames.com/apis#account-v1/GET_getByRiotId"}{GET_getByRiotId} api method and the \href{"https://developer.riotgames.com/apis#account-v1/GET_getActiveShard"}{GET_getActiveShard} api method.}
 \usage{
-get_account_by_puuid(puuid)
+get_account_by_puuid(puuid, server = "americas")
 }
 \arguments{
 \item{puuid}{a character, string for PUUID, a string of 42char like RGAPI-XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX}
+
+\item{server}{a character, must be one of americas,europe,sea or asia,apac}
 }
 \description{
 Standard RATE LIMITS

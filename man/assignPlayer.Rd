@@ -11,6 +11,9 @@ assignPlayer(playerMetadata)
 \item player info from a LoR REST API response match metadata
 }}
 }
+\value{
+a dataframe with the players info in a match
+}
 \description{
 Convert LoR-API call player field to a wide tibble
 }

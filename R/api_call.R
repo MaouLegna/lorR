@@ -14,7 +14,6 @@
 #' @param ... additional paramter for RETRY function, at the moment are timeout, times, pause_base, pause_cap, pause_min,
 #'
 #' @return a response
-#' @export
 #'
 #' @examples
 #' \dontrun{
@@ -25,7 +24,7 @@ api_call <- function(server,path,...,api_key = Sys.getenv("LORAPI_KEY") ) {
 
 	if (api_key=="") stop("Set the LORAPI_key")
 
-	base.url <- lorR::get_path_server(server)
+	base.url <- get_path_server(server)
 	path <- path
 
 	args <- list(...)
